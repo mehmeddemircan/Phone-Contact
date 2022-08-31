@@ -16,6 +16,7 @@ namespace TelefonRehberi.Business.Abstract
         //Task<User> GetById(int userId);
 
         Task<List<User>> GetByName(string name);
+        Task<List<User>> GetByGroupID(int groupId);
 
         //Task UpdateUser(int userId, User user);
 

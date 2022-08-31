@@ -18,10 +18,11 @@ namespace TelefonRehberi.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
-            builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
 
-
+            builder.RegisterType<GroupManager>().As<IGroupService>();
+            builder.RegisterType<GroupRepository>().As<IGroupRepository>();
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

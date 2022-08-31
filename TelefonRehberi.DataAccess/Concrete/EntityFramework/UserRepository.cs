@@ -13,6 +13,14 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
 {
     public class UserRepository : EfEntityRepositoryBase<User, ApplicationDbContext>, IUserRepository
     {
+        public async Task<List<User>> GetUserByGroupId(int groupId)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return await context.Set<User>().Where(u => u.GroupId == groupId).ToListAsync(); 
+            }
+        }
+
         public async Task<List<User>> GetUserByName(string name)
         {
             using (var context = new ApplicationDbContext())

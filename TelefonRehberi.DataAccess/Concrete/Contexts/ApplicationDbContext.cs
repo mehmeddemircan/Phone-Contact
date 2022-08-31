@@ -16,5 +16,7 @@ namespace TelefonRehberi.DataAccess.Concrete.Contexts
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
     }
 }

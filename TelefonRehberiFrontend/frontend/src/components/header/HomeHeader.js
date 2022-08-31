@@ -39,24 +39,24 @@ const HomeHeader = () => {
         >
           <ul class="navbar-nav flex-grow-1">
             <li class="nav-item">
-              <Link class="nav-link text-dark" to="/">
-                Otobus Bileti
+              <Link class="nav-link text-dark" to="/groups">
+              Groups
               </Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link text-dark" to="/">
-                Ucak Bileti
+               Explore
               </Link>
             </li>
 
             <li class="nav-item">
               <Link class="nav-link text-dark" to="/">
-                Feribot Bileti
+                About
               </Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link text-dark" to="/arac-kiralama">
-                Araç Kiralama
+                Help
               </Link>
             </li>
           </ul>

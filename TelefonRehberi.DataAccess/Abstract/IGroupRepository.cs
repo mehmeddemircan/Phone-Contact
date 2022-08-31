@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TelefonRehberi.Core.DataAccess;
 using TelefonRehberi.Entities.Concrete;
+using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberi.DataAccess.Abstract
 {
-    public interface IUserRepository : IEntityRepository<User>
+    public interface IGroupRepository : IEntityRepository<Group>
     {
-
-        Task<List<User>> GetUserByName(string name);
-        Task<List<User>> GetUserByGroupId(int groupId);
+        Task<List<GroupDetailsDTO>> GetGroupDetails();
+        Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id);
     }
 }

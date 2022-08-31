@@ -27,6 +27,11 @@ namespace TelefonRehberi.Business.Concrete
             return await _userRepository.GetAllAsync();
         }
 
+        public async Task<List<User>> GetByGroupID(int groupId)
+        {
+            return await _userRepository.GetUserByGroupId(groupId);
+        }
+
         public async Task<User> GetById(int id)
         {
             return await _userRepository.GetById(id);

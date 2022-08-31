@@ -2,7 +2,9 @@
 using CoreApiResponse;
 using Microsoft.AspNetCore.Mvc;
 using TelefonRehberi.Business.Abstract;
+using TelefonRehberi.Business.Concrete;
 using TelefonRehberi.Core.Utilities.Results;
+using TelefonRehberi.DataAccess.Concrete.EntityFramework;
 using TelefonRehberi.Entities.Concrete;
 
 namespace TelefonRehberiApi.Controllers
@@ -11,13 +13,17 @@ namespace TelefonRehberiApi.Controllers
     [ApiController]
     public class UsersController : BaseController
     {
+        //IUserService _userService= new UserManager(new UserRepository());
+        //IUserService _userService = new UserManager(new UserRepository());
+
         IUserService _userService;
 
         public UsersController(IUserService userService)
         {
+           
             _userService = userService;
+            
         }
-
 
         [HttpPost]
         public async Task<ActionResult<User>> AddUser(User user)
@@ -60,6 +66,13 @@ namespace TelefonRehberiApi.Controllers
         {
 
             return await _userService.GetByName(name); 
+        }
+
+        [HttpGet("groups/{groupId}/allUsers")]
+        public async Task<ActionResult<List<User>>> GetUserByGroupId(int groupId)
+        {
+
+            return await _userService.GetByGroupID(groupId);
         }
     }
 }
