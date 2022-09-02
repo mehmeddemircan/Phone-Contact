@@ -1,11 +1,16 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
-import { GetGroupDetails, GetUsersInGroup } from "../../redux/actions/GroupAction";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  DeleteGroup,
+  GetGroupDetails,
+  GetUsersInGroup,
+} from "../../redux/actions/GroupAction";
 import GroupDetailsModal from "../modal/GroupDetailsModal";
 
 const GroupCards = ({ group }) => {
   const [showGroupDetailsModal, setShowGroupDetailsModal] = useState(false);
-
+  const { loading } = useSelector((state) => state.getGroupDetails);
+  const getGroupDetails = useSelector((state) => state.getGroupDetails);
   const handleShowGroupDetails = () => {
     setShowGroupDetailsModal(true);
   };
@@ -13,15 +18,17 @@ const GroupCards = ({ group }) => {
   const handleCloseGroupDetails = () => {
     setShowGroupDetailsModal(false);
   };
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
 
   const handleGetGroupDetails = (id) => {
-    dispatch(GetGroupDetails(id))
-  }
+    dispatch(GetGroupDetails(id));
+  };
 
-  const handleGetUsers =(id) => {
-      dispatch(GetUsersInGroup(id))
-  }
+  const handleGetUsers = (id) => {
+    dispatch(GetUsersInGroup(id));
+  };
+
+ 
 
   return (
     <Fragment>
@@ -39,26 +46,44 @@ const GroupCards = ({ group }) => {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-       
+
           <a
             href="#"
             class="btn btn-outline-primary"
             key={group.id}
-            onClick={()=>{
-           
-              handleGetUsers(group.id)
-              handleShowGroupDetails()
+            onClick={() => {
+              handleGetUsers(group.id);
+              handleGetGroupDetails(group.id);
+              handleShowGroupDetails();
             }}
           >
             Group Details {group.id}
           </a>
+
+          {/* <a
+            href="#"
+            class="btn btn-link float-end"
+            key={group.id}
+            onClick={()=>{
+
+            }}
+          >
+            Edit
+          </a> */}
         </div>
       </div>
-      <GroupDetailsModal
-        group={group}
-        showGroupDetailsModal={showGroupDetailsModal}
-        handleCloseGroupDetails={handleCloseGroupDetails}
-      />
+      {loading === true ? (
+        <>
+          <h2>waiting</h2>
+        </>
+      ) : (
+        <GroupDetailsModal
+          group={group}
+          showGroupDetailsModal={showGroupDetailsModal}
+          handleCloseGroupDetails={handleCloseGroupDetails}
+
+        />
+      )}
     </Fragment>
   );
 };

@@ -20,25 +20,26 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
             using (var context = new ApplicationDbContext())
             {
                 var result = from g in context.Groups
-                             join user in context.Users on g.Id equals user.GroupId
-                             select new GroupDetailsDTO
-                             {
-                                 UserId = user.Id,
-                                 UserName = user.Name,
-                                 UserSurname = user.Surname,
-                                 UserPhone = user.PhoneNumber,
-                                 GroupId = g.Id,
-                                 GroupImage = g.ThumbNailImage,
-                                 GroupTitle = g.Title,
-                                 GroupName = g.Name,
-                                 GroupCapacity = g.Capacity,
-                                 GroupDescription = g.Description,
-                             };
-                return await result.ToListAsync();
+                            
+                                 select new GroupDetailsDTO
+                                 {
+                                     //UserId = user.Id,
+                                     //UserName = user.Name,
+                                     //UserSurname = user.Surname,
+                                     //UserPhone = user.PhoneNumber,
+                                     Users = g.Users,
+                                     GroupId = g.Id,
+                                     GroupImage = g.ThumbNailImage,
+                                     GroupTitle = g.Title,
+                                     GroupName = g.Name,
+                                     GroupCapacity = g.Capacity,
+                                     GroupDescription = g.Description,
+                                 };
+                    return await result.ToListAsync();
+
+                }
 
             }
-
-        }
 
         public async Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id)
         {   
@@ -46,16 +47,13 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
             //users in group
             using (var context = new ApplicationDbContext())
             {
-
+                
 
                 var result = from g in context.Groups
-                             join user in context.Users on g.Id equals user.GroupId where g.Id == id
+                             where g.Id == id
                              select new GroupDetailsDTO
                              {
-                                 UserId = user.Id,
-                                 UserName = user.Name,
-                                 UserSurname = user.Surname,
-                                 UserPhone = user.PhoneNumber,
+                                 Users = g.Users,
                                  GroupId = g.Id,
                                  GroupImage = g.ThumbNailImage,
                                  GroupTitle = g.Title,

@@ -22,6 +22,78 @@ namespace TelefonRehberi.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Core.Entities.Concrete.OperationClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OperationClaims");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.UserOperationClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OperationClaimId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserOperationClaims");
+                });
+
             modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Group", b =>
                 {
                     b.Property<int>("Id")
@@ -56,7 +128,7 @@ namespace TelefonRehberi.DataAccess.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.User", b =>
+            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,14 +163,48 @@ namespace TelefonRehberi.DataAccess.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.User", b =>
+            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.UserGroup", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "GroupId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("UserGroup");
+                });
+
+            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Person", b =>
                 {
                     b.HasOne("TelefonRehberi.Entities.Concrete.Group", null)
                         .WithMany("Users")
                         .HasForeignKey("GroupId");
+                });
+
+            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.UserGroup", b =>
+                {
+                    b.HasOne("TelefonRehberi.Entities.Concrete.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TelefonRehberi.Entities.Concrete.Person", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Group", b =>

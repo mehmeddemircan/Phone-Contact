@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,18 @@ namespace TelefonRehberi.DataAccess.Concrete.Contexts
         {
             optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=TelefonRehberi;User Id=postgres;Password=Sd635241;");
         }
-
-        public DbSet<User> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserGroup>().HasKey(ug => new { ug.UserId, ug.GroupId });
+        }
+        public DbSet<Person> Persons { get; set; }
 
         public DbSet<Group> Groups { get; set; }
+
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
+
     }
 }

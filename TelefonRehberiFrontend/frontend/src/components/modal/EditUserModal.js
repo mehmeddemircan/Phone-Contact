@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UpdateUser } from "../../redux/actions/UserAction";
+import { UpdateUser } from "../../redux/actions/PersonAction";
 import EditUserForm from "../forms/EditUserForm";
 
 const EditUserModal = ({

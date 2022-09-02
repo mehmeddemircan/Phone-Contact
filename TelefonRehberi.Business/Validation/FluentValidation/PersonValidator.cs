@@ -8,9 +8,9 @@ using TelefonRehberi.Entities.Concrete;
 
 namespace TelefonRehberi.Business.Validation.FluentValidation
 {
-    public class UserValidator : AbstractValidator<User>
+    public class PersonValidator : AbstractValidator<Person>
     {
-        public UserValidator()
+        public PersonValidator()
         {
         
             RuleFor(x => x.Name).MinimumLength(2).WithMessage("Isım en az 2 karakter olmalı ");

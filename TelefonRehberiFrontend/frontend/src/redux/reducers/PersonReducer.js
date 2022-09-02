@@ -20,7 +20,7 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_RESET,
   UPDATE_USER_SUCCESS,
-} from "../constants/UserConstant";
+} from "../constants/PersonConstant";
 
 export const getAllUserReducer = (state = { users: [] }, action) => {
   switch (action.type) {
@@ -61,7 +61,7 @@ export const getUserDetailsReducer = (state = { user: {} }, action) => {
       return state;
   }
 };
-export const addNewUserReducer = (state = { user: {} }, action) => {
+export const addNewUserReducer = (state = { user: {  } }, action) => {
   switch (action.type) {
     case ADD_USER_REQUEST:
       return { ...state, loading: true };
@@ -87,7 +87,7 @@ export const addNewUserReducer = (state = { user: {} }, action) => {
   }
 };
 
-export const userReducer = (state = { updated: {} }, action) => {
+export const userReducer = (state = { updated: {}, deleted : false }, action) => {
   switch (action.type) {
     case DELETE_USER_REQUEST:
     case UPDATE_USER_REQUEST:

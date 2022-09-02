@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import AuthModal from '../modal/AuthModal'
 import SearchModal from '../modal/SearchModal'
+import LoggedInHeader from './LoggedInHeader'
+import NotLoggedInHeader from './NotLoggedInHeader'
 
 const HomeHeader = () => {
 
@@ -13,6 +17,18 @@ const HomeHeader = () => {
   const handleCloseSearchModal = () => {
     setShowSearchModal(false)
   }
+
+  const [showLoginModal, setShowLoginModal] = useState(false)
+
+  const handleShowLoginModal = () => {
+    setShowLoginModal(true)
+  }
+
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false)
+  }
+
+  const auth = useSelector((state) => state.auth)
 
   return (
    <Fragment>
@@ -63,10 +79,14 @@ const HomeHeader = () => {
 
           <ul class="navbar-nav">
             <li class="nav-item">
-              <button class="btn border-0" type="text" >
-                Sign in
-              </button>
 
+            {auth.authenticate ? <LoggedInHeader /> : <NotLoggedInHeader handleShowLoginModal={handleShowLoginModal} />}
+             
+              
+              <AuthModal 
+                showLoginModal={showLoginModal}
+                handleCloseLoginModal={handleCloseLoginModal}
+              />
             
             </li>
             <li class="nav-item">

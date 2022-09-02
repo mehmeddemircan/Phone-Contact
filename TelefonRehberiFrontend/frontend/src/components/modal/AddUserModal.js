@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import AddUserForm from "../forms/AddUserForm";
 import { useDispatch, useSelector } from "react-redux";
-import { AddUser } from "../../redux/actions/UserAction";
+import { AddUser } from "../../redux/actions/PersonAction";
 import { toast } from "react-toastify";
 const AddUserModal = ({ showUserModal, handleCloseUserModal }) => {
   const dispatch = useDispatch();

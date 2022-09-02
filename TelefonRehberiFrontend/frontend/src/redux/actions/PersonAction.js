@@ -17,7 +17,7 @@ import {
   GET_USERS_BY_NAME_REQUEST,
   GET_USERS_BY_NAME_SUCCESS,
   GET_USERS_BY_NAME_FAIL
-} from "../constants/UserConstant";
+} from "../constants/PersonConstant";
 import axios from "axios";
 export const AllUser = () => async (dispatch) => {
   try {
@@ -25,7 +25,7 @@ export const AllUser = () => async (dispatch) => {
       type: GET_ALL_USER_REQUEST,
     });
 
-    const { data } = await axios.get("https://localhost:7046/api/Users");
+    const { data } = await axios.get("https://localhost:7046/api/Persons");
 
     dispatch({
       type: GET_ALL_USER_SUCCESS,
@@ -45,7 +45,7 @@ export const AddUser = (user) => async (dispatch) => {
       type: ADD_USER_REQUEST,
     });
 
-    const { data } = await axios.post("https://localhost:7046/api/Users", user);
+    const { data } = await axios.post("https://localhost:7046/api/Persons", user);
 
     dispatch({
       type: ADD_USER_SUCCESS,
@@ -66,7 +66,7 @@ export const DeleteUser = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.delete(
-      `https://localhost:7046/api/Users/${id}`
+      `https://localhost:7046/api/Persons/${id}`
     );
 
     dispatch({
@@ -88,7 +88,7 @@ export const UpdateUser = (id,user) => async (dispatch) => {
     });
 
     const { data } = await axios.put(
-      `https://localhost:7046/api/Users/${id}`,user
+      `https://localhost:7046/api/Persons/${id}`,user
     );
 
     dispatch({
@@ -110,7 +110,7 @@ export const GetUserDetails = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://localhost:7046/api/Users/${id}`
+      `https://localhost:7046/api/Persons/${id}`
     );
 
     dispatch({
@@ -132,7 +132,7 @@ export const GetUsersByName = (searchedName) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://localhost:7046/api/Users/users/${searchedName}`
+      `https://localhost:7046/api/Persons/persons/${searchedName}`
     );
 
     dispatch({
@@ -146,5 +146,6 @@ export const GetUsersByName = (searchedName) => async (dispatch) => {
     });
   }
 };
+
 
 

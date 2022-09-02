@@ -12,6 +12,7 @@ const AddGroupModal = ({ showAddGroupModal, handleCloseAddGroupModal }) => {
     const [url, setUrl] = useState("string")
     const [capacity, setCapacity] = useState(0)
 
+
     const dispatch = useDispatch()
 
     const handleAddGroupSubmit = ()  => {
@@ -34,6 +35,7 @@ const AddGroupModal = ({ showAddGroupModal, handleCloseAddGroupModal }) => {
             description={description}
             url={url}
             capacity={capacity}
+         
             setTitle={setTitle}
             setCapacity={setCapacity}
             setDescription={setDescription}

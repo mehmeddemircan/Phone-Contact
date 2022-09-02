@@ -5,7 +5,7 @@ import {
   AllUser,
   DeleteUser,
   GetUserDetails,
-} from "../../redux/actions/UserAction";
+} from "../../redux/actions/PersonAction";
 import UserDeleteButton from "../button/UserDeleteButton";
 import UserEditButton from "../button/UserEditButton";
 import EditUserModal from "../modal/EditUserModal";

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TelefonRehberi.Core.Entities;
@@ -35,10 +36,19 @@ namespace TelefonRehberi.Core.DataAccess.EntityFramework
             }
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (var context = new TContext())
             {
+                return context.Set<TEntity>().SingleOrDefault(filter);
+            }
+        }
+
+        public async Task<List<TEntity>> GetAllAsync()
+        {
+            using (var context = new TContext())
+            {   
+                
                 return  await context.Set<TEntity>().ToListAsync(); 
             }
         }

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +13,17 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
 {
     public class UserRepository : EfEntityRepositoryBase<User, ApplicationDbContext>, IUserRepository
     {
-        public async Task<List<User>> GetUserByGroupId(int groupId)
+        public List<OperationClaim> GetClaims(User user)
         {
             using (var context = new ApplicationDbContext())
             {
-                return await context.Set<User>().Where(u => u.GroupId == groupId).ToListAsync(); 
-            }
-        }
+                var result = from operationClaim in context.OperationClaims
+                             join userOperationClaim in context.UserOperationClaims
+                                 on operationClaim.Id equals userOperationClaim.OperationClaimId
+                             where userOperationClaim.UserId == user.Id
+                             select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+                return result.ToList();
 
-        public async Task<List<User>> GetUserByName(string name)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                return await context.Set<User>().Where(e => e.Name == name).ToListAsync();
             }
         }
     }

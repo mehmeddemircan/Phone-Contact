@@ -21,7 +21,9 @@ namespace TelefonRehberi.Entities.Concrete
 
         public int Capacity { get; set; }
 
-        //public virtual List<User>? Users { get; set; }
+        public ICollection<Person>? Users { get; set; }
+
+        //public  List<UserGroup>? UserGroups { get; set; }
 
 
     }

@@ -1,6 +1,13 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using TelefonRehberi.Business.DependencyResolvers.Autofac;
+
+using TelefonRehberi.Core.IoC;
+using TelefonRehberi.Core.Utilities.Security.Encryption;
+using TelefonRehberi.Core.Utilities.Security.JWT;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +27,23 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterMod
 //connecting to frontend segment
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
+var tokenOptions = configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+        };
+    });
+
 
 builder.Services.AddCors(options =>
 {
@@ -43,6 +67,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

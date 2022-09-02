@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TelefonRehberi.Entities.Concrete;
 
 namespace TelefonRehberi.Entities.DTOs
 {
     public class GroupDetailsDTO
     {
-        public int UserId { get; set; }
-
-        public string  UserName  { get; set; }
-
-        public string  UserSurname  { get; set; }
-
-        public string UserPhone { get; set; }
+    
 
 
         public int GroupId { get; set; }
@@ -26,5 +21,7 @@ namespace TelefonRehberi.Entities.DTOs
 
         public int GroupCapacity { get; set; }
         public string GroupImage { get; set; }
+
+        public ICollection<Person>? Users { get; set; }
     }
 }

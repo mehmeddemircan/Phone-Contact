@@ -11,8 +11,8 @@ namespace TelefonRehberiApi.Controllers
     public class GroupsController : ControllerBase
     {
         IGroupService _groupService;
-        IUserService _userService; 
-        public GroupsController(IGroupService groupService, IUserService userService)
+        IPersonService _userService; 
+        public GroupsController(IGroupService groupService, IPersonService userService)
         {
             _groupService = groupService;
             _userService = userService;
@@ -34,7 +34,7 @@ namespace TelefonRehberiApi.Controllers
 
         [HttpGet("groupdetails")]
 
-        public async Task<ActionResult<List<GroupDetailsDTO>>> GetGroupDetails()
+        public async Task<List<GroupDetailsDTO>> GetGroupDetails()
         {
 
             return await _groupService.GetGroupDetailsAsync();
@@ -60,6 +60,19 @@ namespace TelefonRehberiApi.Controllers
             }
 
             await _groupService.TDelete(id);
+        }
+
+        [HttpPut("{groupId}")]
+        public async Task UpdateGroup(int groupId,Group group)
+        {
+
+
+            group.Id = groupId; 
+            await _groupService.TUpdate(groupId,group);
+
+          
+
+     
         }
 
     }

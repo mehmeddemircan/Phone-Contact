@@ -49,9 +49,9 @@ namespace TelefonRehberi.Business.Concrete
             await _groupRepository.DeleteAsync(id);    
         }
 
-        public Task TUpdate(int id, Group entity)
+        public async Task TUpdate(int id, Group entity)
         {
-            throw new NotImplementedException();
-        }
+            await _groupRepository.UpdateAsync(id, entity);
+        } 
     }
 }

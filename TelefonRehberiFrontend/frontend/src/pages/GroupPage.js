@@ -5,18 +5,13 @@ import GroupCards from "../components/card/GroupCards";
 import HomeLayout from "../components/layout/HomeLayout";
 import AddGroupModal from "../components/modal/AddGroupModal";
 import { AllGroup } from "../redux/actions/GroupAction";
-import { DELETE_USER_RESET } from "../redux/constants/UserConstant";
+import { ADD_GROUP_RESET } from "../redux/constants/GroupConstants";
+import { DELETE_USER_RESET } from "../redux/constants/PersonConstant";
 
 const GroupPage = () => {
   const getAllGroup = useSelector((state) => state.getAllGroup);
   const {deleted} = useSelector((state) => state.user);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(AllGroup());
-
-  }, [dispatch]);
-
+  const {success} = useSelector((state) => state.addNewGroup);
   const [showAddGroupModal, setShowAddGroupModal] = useState(false);
 
   const handleShowAddGroupModal = () => {
@@ -25,6 +20,20 @@ const GroupPage = () => {
   const handleCloseAddGroupModal = () => {
     setShowAddGroupModal(false);
   };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(AllGroup());
+
+
+    if (success) {
+      dispatch({ type: ADD_GROUP_RESET });
+      setShowAddGroupModal(false)
+    }
+
+  }, [dispatch,success]);
+
+ 
 
   return (
     <Fragment>

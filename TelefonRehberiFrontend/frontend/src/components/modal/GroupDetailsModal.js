@@ -1,30 +1,52 @@
 import { Badge, Button, Drawer, Space, Tooltip } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUsersInGroup } from "../../redux/actions/GroupAction";
-import { DELETE_USER_RESET } from "../../redux/constants/UserConstant";
+import { Navigate } from "react-router-dom";
+import {
+  AllGroup,
+  DeleteGroup,
+  GetGroupDetails,
+  GetUsersInGroup,
+} from "../../redux/actions/GroupAction";
+import { AllUser } from "../../redux/actions/PersonAction";
+import { DELETE_GROUP_RESET, UPDATE_GROUP_RESET } from "../../redux/constants/GroupConstants";
+import {
+  DELETE_USER_RESET,
+  UPDATE_USER_RESET,
+} from "../../redux/constants/PersonConstant";
 import UserListGroupModalCard from "../card/UserListGroupModalCard";
+import EditGroupForm from "../forms/EditGroupForm.js";
 import GroupMembers from "../list/GroupMembers";
-import UserListGroupModal from "../list/UserListGroupModal";
+import UserListGroupModal from "../list/UserListGroup";
 
 const GroupDetailsModal = ({
   group,
   showGroupDetailsModal,
   handleCloseGroupDetails,
 }) => {
-
-  const dispatch = useDispatch();
   const getUsersByGroup = useSelector((state) => state.getUsersByGroup);
-
-
-  const { deleted } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.user);
+  const { updateSuccess,deleted } = useSelector((state) => state.groupUpdateDelete);
+  const dispatch = useDispatch();
+  const handleDeleteGroup = (id) => {
+    dispatch(DeleteGroup(id));
+  };
   useEffect(() => {
-    dispatch(GetUsersInGroup(group.id));
-    
+ 
     if (deleted) {
-      dispatch({ type: DELETE_USER_RESET });
+      handleCloseGroupDetails();
+      dispatch({ type: DELETE_GROUP_RESET });
+      dispatch(AllGroup());
     }
-  }, [dispatch, deleted]);
+  }, [dispatch, updateSuccess,deleted]);
+
+  const [showEditForm, setShowEditForm] = useState(false)
+
+  const handleEditForm = () => {
+    setShowEditForm((prev) => !prev)
+
+  
+  }
 
   return (
     <Drawer
@@ -62,43 +84,64 @@ const GroupDetailsModal = ({
       <div class="container-fluid">
         <div class="row">
           <div className="card col-md-6 px-5">
-            <h2>Group Details</h2>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">{group.name}</li>
-              <li class="list-group-item">{group.title}</li>
-              <li class="list-group-item">{group.description}</li>
-              <li class="list-group-item">{group.capacity}</li>
-              <li class="list-group-item">{group.id}</li>
-            </ul>
+            <div class="d-flex flex-row align-items-center justify-content-between">
+            <h2 >Group Details</h2>
+            <Button class="btn btn-outline-secondary " onClick={() => {
+                handleEditForm(); 
+            }}>{showEditForm ? "Cancel" : "Edit"}</Button>
+            </div>
+            {/* group form */}
+            <EditGroupForm 
+              group={group}
+              showEditForm = {showEditForm}
+              handleEditForm = {handleEditForm}
+            />
           </div>
           <div class="card col-md-6">
-            <Space class="d-inline-block py-3">
-              <Badge count={getUsersByGroup.users.length}>
-                <h6 class="d-inline-block mx-3">
-                  {" "}
-                  {getUsersByGroup.success === true &&
-                  getUsersByGroup.users.length !== 0
-                    ? "Grup Üyeleri"
-                    : "Henüz Hic Üye yok"}{" "}
-                </h6>
-              </Badge>
-            </Space>
+            <div class="d-flex justify-content-between align-items-center">
+              <Space class="d-inline-block py-3">
+                <Badge count={getUsersByGroup.users.length}>
+                  <h6 class="d-inline-block mx-3">
+                    {" "}
+                    {getUsersByGroup.success === true &&
+                    getUsersByGroup.users.length !== 0
+                      ? "Grup Üyeleri"
+                      : "Henüz Hic Üye yok"}{" "}
+                  </h6>
+                </Badge>
+              </Space>
+              {getUsersByGroup.users.length === 0 ? (
+                <Button
+                  href="#"
+                  class="btn btn-danger float-end"
+                  key={group.id}
+                  onClick={() => {
+                    handleDeleteGroup(group.id);
+                  }}
+                >
+                  Delete Group
+                </Button>
+              ) : null}
+            </div>
 
             <ol class="list-group list-group-numbered">
-              {getUsersByGroup.users.map((user) => (
-                <GroupMembers key={user.id} user={user} />
-              ))}
+              {loading === true ? (
+                <h2>loading</h2>
+              ) : (
+                getUsersByGroup.users.map((user) => (
+                  <GroupMembers key={user.id} user={user} />
+                ))
+              )}
             </ol>
           </div>
         </div>
       </div>
 
-  
       <div style={{ margin: "80px 0px" }}>
         <div className="row">
-                  <UserListGroupModalCard 
-                 
-                  />
+          <UserListGroupModalCard
+            handleCloseGroupDetails={handleCloseGroupDetails}
+          />
           <div className="col-md-6 px-5">
             <h2>Trends</h2>
             <ul class="list-group list-group-flush">
@@ -109,8 +152,6 @@ const GroupDetailsModal = ({
               <li class="list-group-item">And a fifth one</li>
             </ul>
           </div>
-          {/* 
-          <CategoryCards /> */}
         </div>
       </div>
     </Drawer>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TelefonRehberi.Core.Entities;
@@ -18,7 +19,9 @@ namespace TelefonRehberi.Core.DataAccess
         Task UpdateAsync(int id,T entity);
 
         Task<T> GetById(int id);
-    
+
+        T Get(Expression<Func<T, bool>> filter);
+
 
         Task DeleteAsync(int id); 
     }

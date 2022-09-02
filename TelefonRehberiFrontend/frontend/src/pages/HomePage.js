@@ -6,8 +6,8 @@ import AddUserForm from "../components/forms/AddUserForm";
 import HomeLayout from "../components/layout/HomeLayout";
 import AddUserModal from "../components/modal/AddUserModal";
 import UserListTable from "../components/table/UserListTable";
-import { AddUser, AllUser } from "../redux/actions/UserAction";
-import { ADD_USER_RESET, DELETE_USER_RESET, UPDATE_USER_RESET } from "../redux/constants/UserConstant";
+import { AddUser, AllUser } from "../redux/actions/PersonAction";
+import { ADD_USER_RESET, DELETE_USER_RESET, UPDATE_USER_RESET } from "../redux/constants/PersonConstant";
 
 const HomePage = () => {
   const dispatch = useDispatch();

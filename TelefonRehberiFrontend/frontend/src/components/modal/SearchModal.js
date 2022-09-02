@@ -1,7 +1,7 @@
 import { Button, Drawer } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUsersByName } from "../../redux/actions/UserAction";
+import { GetUsersByName } from "../../redux/actions/PersonAction";
 import { Badge, Space } from "antd";
 const SearchModal = ({ showSearchModal, handleCloseSearchModal }) => {
   const getAllUser = useSelector((state) => state.getAllUser);
