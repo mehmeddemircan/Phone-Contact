@@ -44,7 +44,7 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
         public async Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id)
         {   
 
-            //users in group
+            //persons in group
             using (var context = new ApplicationDbContext())
             {
                 
@@ -65,5 +65,25 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
                 return await result.ToListAsync();
             }
         }
+
+        public async Task<List<GroupDetailsDTO>> GetGroupsByUserId(int userId)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var result = from g in context.Groups
+                             where g.UserId == userId
+                             select new GroupDetailsDTO
+                             {
+                                 Users = g.Users,
+                                 GroupId = g.Id,
+                                 GroupImage = g.ThumbNailImage,
+                                 GroupTitle = g.Title,
+                                 GroupName = g.Name,
+                                 GroupCapacity = g.Capacity,
+                                 GroupDescription = g.Description,
+                             };
+
+                return await result.ToListAsync();
+       }    }
     }
 }

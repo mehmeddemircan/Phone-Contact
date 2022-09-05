@@ -8,6 +8,7 @@ using TelefonRehberi.Business.Validation.FluentValidation;
 using TelefonRehberi.Core.Aspects.Validation;
 using TelefonRehberi.DataAccess.Abstract;
 using TelefonRehberi.Entities.Concrete;
+using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberi.Business.Concrete
 {
@@ -27,6 +28,16 @@ namespace TelefonRehberi.Business.Concrete
             return await _personRepository.GetAllAsync();
         }
 
+        public async Task<List<Person>> GetAllByUser(int userId)
+        {
+            return await _personRepository.GetAllByUserAsync(userId);
+        }
+
+        public async Task<List<Person>> GetAllPersonIdDesc()
+        {
+            return await _personRepository.GetAllPersonOrderByDesc(); 
+        }
+
         public async Task<List<Person>> GetByGroupID(int groupId)
         {
             return await _personRepository.GetUserByGroupId(groupId);
@@ -42,6 +53,10 @@ namespace TelefonRehberi.Business.Concrete
             return await _personRepository.GetUserByName(name);
         }
 
+        public List<IGrouping<char, Person>> GroupPeopleByName()
+        {
+            return  _personRepository.GroupPeopleByName(); 
+        }
 
         [ValidationAspect(typeof(PersonValidator))]
         public  async Task<Person> TAdd(Person entity)

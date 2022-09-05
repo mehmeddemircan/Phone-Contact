@@ -6,6 +6,7 @@ using TelefonRehberi.Business.Concrete;
 using TelefonRehberi.Core.Utilities.Results;
 using TelefonRehberi.DataAccess.Concrete.EntityFramework;
 using TelefonRehberi.Entities.Concrete;
+using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberiApi.Controllers
 {
@@ -13,15 +14,15 @@ namespace TelefonRehberiApi.Controllers
     [ApiController]
     public class PersonsController : BaseController
     {
-        //IUserService _userService= new UserManager(new UserRepository());
-        //IUserService _userService = new UserManager(new UserRepository());
+
 
         IPersonService _personService;
-
+    
         public PersonsController(IPersonService personService)
         {
 
             _personService = personService;
+           
             
         }
 
@@ -32,9 +33,15 @@ namespace TelefonRehberiApi.Controllers
         }
 
         [HttpGet]
-        public async  Task<List<Person>> GetAllUser()
+        public async Task<List<Person>> GetAllUser()
         {
             return await _personService.GetAll();
+        }
+
+        [HttpGet("users/{userId}/allPersons")]
+        public async  Task<List<Person>> GetAllByUserId(int userId)
+        {
+            return await _personService.GetAllByUser(userId);
         }
 
         [HttpPut("{personId}")]
@@ -74,5 +81,22 @@ namespace TelefonRehberiApi.Controllers
 
             return await _personService.GetByGroupID(groupId);
         }
+
+        [HttpGet("orderBy-desc")]
+
+        public async Task<ActionResult<List<Person>>> GetPersonOrderByDesc ()
+        {
+            return await _personService.GetAllPersonIdDesc();
+        }
+
+
+        [HttpGet("grouping-by-name")]
+
+        public List<IGrouping<char, Person>> GroupPeopleByName()
+        {
+            return  _personService.GroupPeopleByName(); 
+        }
+
+        
     }
 }

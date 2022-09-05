@@ -24,6 +24,7 @@ namespace TelefonRehberi.Business.Concrete
             return await _groupRepository.GetAllAsync();
         }
 
+   
         public Task<Group> GetById(int id)
         {
             throw new NotImplementedException();
@@ -37,6 +38,11 @@ namespace TelefonRehberi.Business.Concrete
         public async Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id)
         {
             return await _groupRepository.GetGroupDetailsById(id);
+        }
+
+        public async Task<List<GroupDetailsDTO>> GetGroupsByUser(int userId)
+        {
+            return await _groupRepository.GetGroupsByUserId(userId); 
         }
 
         public async Task<Group> TAdd(Group entity)

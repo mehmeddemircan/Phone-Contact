@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace TelefonRehberi.DataAccess.Concrete.Contexts
 {
     public class ApplicationDbContext : DbContext
     {
+     
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=TelefonRehberi;User Id=postgres;Password=Sd635241;");

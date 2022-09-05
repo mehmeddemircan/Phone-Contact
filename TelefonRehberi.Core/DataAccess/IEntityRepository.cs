@@ -15,6 +15,7 @@ namespace TelefonRehberi.Core.DataAccess
         Task<T> AddAsync(T entity);
 
         Task<List<T>> GetAllAsync();
+      
 
         Task UpdateAsync(int id,T entity);
 

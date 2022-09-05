@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -13,6 +15,12 @@ namespace TelefonRehberi.Core.DataAccess.Dapper
     where TEntity : BaseEntity, new()
     where TContext : DbContext, new()
     {
+
+        private readonly IConfiguration _configuration;
+        public DapperRepositoryBase(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public Task<TEntity> AddAsync(TEntity entity)
         {
             throw new NotImplementedException();
@@ -28,9 +36,17 @@ namespace TelefonRehberi.Core.DataAccess.Dapper
             throw new NotImplementedException();
         }
 
-        public Task<List<TEntity>> GetAllAsync()
+        public  Task<List<TEntity>> GetAllAsync()
         {
+
             throw new NotImplementedException();
+            //var sql = "SELECT * FROM Products";
+            //using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            //{
+            //    connection.Open();
+            //    var result = await connection.QueryAsync<TEntity>(sql);
+            //    return result.ToList();
+            //}
         }
 
         public Task<TEntity> GetById(int id)

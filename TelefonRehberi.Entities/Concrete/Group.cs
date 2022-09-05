@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,11 @@ namespace TelefonRehberi.Entities.Concrete
         public string? Url { get; set; }
 
         public int Capacity { get; set; }
+
+
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+
 
         public ICollection<Person>? Users { get; set; }
 

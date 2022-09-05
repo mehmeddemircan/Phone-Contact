@@ -13,7 +13,10 @@ namespace TelefonRehberi.Business.Abstract
     {
 
         Task<List<GroupDetailsDTO>> GetGroupDetailsAsync(); 
-        Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id); 
+        Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id);
+        Task<List<GroupDetailsDTO>> GetGroupsByUser(int userId);
+        
+        
 
     }
 }

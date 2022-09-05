@@ -1,6 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TelefonRehberi.Business.DependencyResolvers.Autofac;
@@ -8,6 +8,7 @@ using TelefonRehberi.Business.DependencyResolvers.Autofac;
 using TelefonRehberi.Core.IoC;
 using TelefonRehberi.Core.Utilities.Security.Encryption;
 using TelefonRehberi.Core.Utilities.Security.JWT;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +25,17 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacBusinessModule()));
 
 
+
 //connecting to frontend segment
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 var tokenOptions = configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+
+
+
+
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -44,7 +52,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
 builder.Services.AddCors(options =>
 {
     var frontendURL = configuration.GetValue<string>("frontend_url");
@@ -55,6 +62,9 @@ builder.Services.AddCors(options =>
     });
 
 });
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

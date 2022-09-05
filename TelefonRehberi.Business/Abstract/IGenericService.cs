@@ -13,6 +13,7 @@ namespace TelefonRehberi.Business.Abstract
 
         Task<T> TAdd(T entity);
 
+
         Task<List<T>> GetAll();
 
         Task<T> GetById(int id);

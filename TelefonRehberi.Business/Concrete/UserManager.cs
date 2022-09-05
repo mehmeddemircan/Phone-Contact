@@ -32,5 +32,10 @@ namespace TelefonRehberi.Business.Concrete
         {
             return _userRepository.Get(u => u.Email == email);
         }
+
+        public async Task<List<User>> GetAll()
+        {
+            return await _userRepository.GetAllAsync();
+        }
     }
 }

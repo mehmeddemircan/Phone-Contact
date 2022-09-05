@@ -75,5 +75,12 @@ namespace TelefonRehberiApi.Controllers
      
         }
 
+
+        [HttpGet("/user/{userId}/myGroups")]
+        public async Task<ActionResult<List<GroupDetailsDTO>>> GetGroupsByUserId(int userId)
+        {
+            return await _groupService.GetGroupsByUser(userId);
+        }
+
     }
 }

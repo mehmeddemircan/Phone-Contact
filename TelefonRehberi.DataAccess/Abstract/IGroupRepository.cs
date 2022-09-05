@@ -13,5 +13,6 @@ namespace TelefonRehberi.DataAccess.Abstract
     {
         Task<List<GroupDetailsDTO>> GetGroupDetails();
         Task<List<GroupDetailsDTO>> GetGroupDetailsById(int id);
+        Task<List<GroupDetailsDTO>> GetGroupsByUserId(int userId);
     }
 }
