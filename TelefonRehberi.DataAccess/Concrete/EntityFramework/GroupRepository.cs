@@ -28,6 +28,7 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
                                      //UserSurname = user.Surname,
                                      //UserPhone = user.PhoneNumber,
                                      Users = g.Users,
+                                     Comments = g.Comments,
                                      GroupId = g.Id,
                                      GroupImage = g.ThumbNailImage,
                                      GroupTitle = g.Title,

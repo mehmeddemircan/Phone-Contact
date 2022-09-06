@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +29,21 @@ namespace TelefonRehberi.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+           
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
+
+            builder.RegisterType<CommentManager>().As<ICommentService>(); 
+            builder.RegisterType<CommentRepository>().As<ICommentRepository>();
+
+            builder.RegisterType<SendGridMailService>().As<IMailService>();
+
+
+
+
+
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

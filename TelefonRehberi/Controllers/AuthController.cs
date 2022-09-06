@@ -12,10 +12,18 @@ namespace TelefonRehberiApi.Controllers
     {
 
         private IAuthService _authService;
+        private IUserService _userService;
+        private IMailService _mailService;
 
-        public AuthController(IAuthService authService)
+        private readonly IConfiguration _configuration; 
+
+        public AuthController(IAuthService authService,IUserService userService, IMailService mailService, IConfiguration configuration)
         {
             _authService = authService;
+            _userService = userService; 
+            _mailService = mailService;
+            _configuration = configuration;
+
         }
 
         [HttpPost("login")]
@@ -47,7 +55,7 @@ namespace TelefonRehberiApi.Controllers
 
             var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             var result = _authService.CreateAccessToken(registerResult.Data);
- 
+
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -55,5 +63,32 @@ namespace TelefonRehberiApi.Controllers
 
             return BadRequest(result.Message);
         }
+
+        [HttpPost("forgot-password")]
+
+        public async Task<ActionResult<User>> ForgotPassword(string email)
+        {
+            var user = _userService.GetByMail(email);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+
+
+
+
+            user.PasswordResetToken = _authService.CreateRandomToken();
+            user.ResetTokenExpires = DateTime.Now.AddDays(1);
+
+            string url = $"{_configuration["AppUrlReact"]}/resetpassword/{email}/{user.PasswordResetToken}";
+
+           await  _mailService.SendEmailAsync(email, "Reset Password", "<h1>Follow the instructions to reset your password</h1>" + $"<p>To reset your password <a href='{url}'>Click here</a> </p>");
+
+            return user; 
+
+        }
+
+
+
     }
 }

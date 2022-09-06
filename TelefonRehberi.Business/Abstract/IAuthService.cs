@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TelefonRehberi.Core.Utilities.Results;
 using TelefonRehberi.Core.Utilities.Security.JWT;
+using TelefonRehberi.Entities.Concrete.Response;
 using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberi.Business.Abstract
@@ -18,5 +19,10 @@ namespace TelefonRehberi.Business.Abstract
         IDataResult<User> Login(UserForLoginDto userForLoginDto);
         IResult UserExists(string email);
         IDataResult<AccessToken> CreateAccessToken(User user);
+
+        public string CreateRandomToken(); 
+        
+
+    
     }
 }

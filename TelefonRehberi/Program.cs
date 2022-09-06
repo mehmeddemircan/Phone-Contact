@@ -1,14 +1,18 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Hangfire;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using TelefonRehberi.Business.Abstract;
+using TelefonRehberi.Business.Concrete;
 using TelefonRehberi.Business.DependencyResolvers.Autofac;
 
 using TelefonRehberi.Core.IoC;
 using TelefonRehberi.Core.Utilities.Security.Encryption;
 using TelefonRehberi.Core.Utilities.Security.JWT;
-
+using TelefonRehberi.DataAccess.Concrete.Contexts;
+using TelefonRehberiApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +56,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+
+
+
 builder.Services.AddCors(options =>
 {
     var frontendURL = configuration.GetValue<string>("frontend_url");
@@ -63,7 +71,8 @@ builder.Services.AddCors(options =>
 
 });
 
-
+//var startup = new Startup(builder.Configuration);
+//startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 

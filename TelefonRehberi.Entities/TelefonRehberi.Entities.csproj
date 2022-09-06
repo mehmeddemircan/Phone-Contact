@@ -10,8 +10,4 @@
     <ProjectReference Include="..\TelefonRehberi.Core\TelefonRehberi.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
-
 </Project>

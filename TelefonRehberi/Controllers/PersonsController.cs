@@ -27,13 +27,13 @@ namespace TelefonRehberiApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Person>> AddUser(Person person)
+        public async Task<ActionResult<Person>> AddPerson(Person person)
         {
             return await _personService.TAdd(person);
         }
 
         [HttpGet]
-        public async Task<List<Person>> GetAllUser()
+        public async Task<List<Person>> GetAllPerson()
         {
             return await _personService.GetAll();
         }
@@ -46,7 +46,7 @@ namespace TelefonRehberiApi.Controllers
 
         [HttpPut("{personId}")]
 
-        public async Task UpdateUser(int personId, Person person)
+        public async Task UpdatePerson(int personId, Person person)
         {
             person.Id = personId;
             await _personService.TUpdate(personId, person);
@@ -55,28 +55,28 @@ namespace TelefonRehberiApi.Controllers
 
         [HttpGet("{personId}")]
 
-        public async Task<ActionResult<Person>> GetUserById(int personId)
+        public async Task<ActionResult<Person>> GetPersonById(int personId)
         {
             return await _personService.GetById(personId);
         }
 
         [HttpDelete("{personId}")]
 
-        public async Task DeleteUser(int personId)
+        public async Task DeletePerson(int personId)
         {   
             await _personService.TDelete(personId); 
         }
 
         [HttpGet("persons/{name}")]
 
-        public async Task<ActionResult<List<Person>>> GetUserByName(string name)
+        public async Task<ActionResult<List<Person>>> GetPersonByName(string name)
         {
 
             return await _personService.GetByName(name); 
         }
 
         [HttpGet("groups/{groupId}/allPersons")]
-        public async Task<ActionResult<List<Person>>> GetUserByGroupId(int groupId)
+        public async Task<ActionResult<List<Person>>> GetPersonByGroupId(int groupId)
         {
 
             return await _personService.GetByGroupID(groupId);

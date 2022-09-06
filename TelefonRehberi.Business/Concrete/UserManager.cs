@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TelefonRehberi.Business.Abstract;
+using TelefonRehberi.Core.Helpers;
 using TelefonRehberi.DataAccess.Abstract;
+using TelefonRehberi.Entities.Concrete;
+using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberi.Business.Concrete
 {
@@ -33,9 +36,16 @@ namespace TelefonRehberi.Business.Concrete
             return _userRepository.Get(u => u.Email == email);
         }
 
-        public async Task<List<User>> GetAll()
+        public  PagedList<User> GetAllByPage(UsersParameter usersParameter)
         {
-            return await _userRepository.GetAllAsync();
+            return  _userRepository.GetAllByPage(usersParameter);
+        }
+
+       
+   
+        public Task TDelete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

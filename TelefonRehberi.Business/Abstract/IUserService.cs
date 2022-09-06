@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TelefonRehberi.Core.Helpers;
+using TelefonRehberi.Entities.Concrete;
+using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberi.Business.Abstract
 {
@@ -14,6 +17,8 @@ namespace TelefonRehberi.Business.Abstract
         void Add(User user);
         User GetByMail(string email);
 
-        Task<List<User>> GetAll();
+        PagedList<User> GetAllByPage(UsersParameter usersParameter);
+
+
     }
 }

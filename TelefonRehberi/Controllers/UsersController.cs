@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TelefonRehberi.Business.Abstract;
+using TelefonRehberi.Core.Helpers;
+using TelefonRehberi.Entities.Concrete;
+using TelefonRehberi.Entities.DTOs;
 
 namespace TelefonRehberiApi.Controllers
 {
@@ -19,11 +22,12 @@ namespace TelefonRehberiApi.Controllers
 
         [HttpGet("getAll")]
 
-        public async Task<ActionResult<List<User>>> getAllUser()
+        public PagedList<User> GetAllUser([FromQuery] UsersParameter usersParameter)
         {
-            return await _userService.GetAll(); 
+            return  _userService.GetAllByPage(usersParameter); 
         }
 
 
+  
     }
 }

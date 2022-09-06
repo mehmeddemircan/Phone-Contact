@@ -23,5 +23,6 @@ namespace TelefonRehberi.Entities.DTOs
         public string GroupImage { get; set; }
 
         public ICollection<Person>? Users { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
     }
 }

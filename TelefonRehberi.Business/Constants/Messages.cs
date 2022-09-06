@@ -22,5 +22,8 @@ namespace TelefonRehberi.Business.Constants
         public static string ProductNameAlreadyExists = "Ürün ismi zaten mevcut";
 
 
+        public static string SendSuccessfully = "Reset password URL has been sent to the email successfully";
+
+
     }
 }

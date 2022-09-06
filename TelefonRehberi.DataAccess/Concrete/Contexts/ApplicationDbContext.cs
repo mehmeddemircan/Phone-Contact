@@ -30,6 +30,9 @@ namespace TelefonRehberi.DataAccess.Concrete.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
+       
 
     }
 }

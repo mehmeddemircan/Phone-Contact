@@ -29,6 +29,10 @@ namespace TelefonRehberi.Entities.Concrete
 
         public ICollection<Person>? Users { get; set; }
 
+
+        public ICollection<Comment>? Comments { get; set; }
+
+
         //public  List<UserGroup>? UserGroups { get; set; }
 
 
