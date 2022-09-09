@@ -13,6 +13,8 @@ import {
 const initialState = {
   token: null,
   user: {
+    firstName:"",
+    lastName:"",
     name: "",
     email: "",
   },

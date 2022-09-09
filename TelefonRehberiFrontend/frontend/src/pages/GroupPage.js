@@ -10,6 +10,7 @@ import { DELETE_USER_RESET } from "../redux/constants/PersonConstant";
 
 const GroupPage = () => {
   const getAllGroup = useSelector((state) => state.getAllGroup);
+  const {loading} = useSelector((state) => state.getAllGroup);
   const {deleted} = useSelector((state) => state.user);
   const {success} = useSelector((state) => state.addNewGroup);
   const [showAddGroupModal, setShowAddGroupModal] = useState(false);
@@ -53,9 +54,11 @@ const GroupPage = () => {
           />
         </div>
         <div class="row d-flex flex-wrap justify-content-between">
-          {getAllGroup.groups.map((group) => (
-            <GroupCards group={group} />
-          ))}
+          {loading === true ? <h2>waiting</h2> : (
+              getAllGroup.groups.map((groupItem) => (
+                <GroupCards key={groupItem.id} groupItem={groupItem}/>
+              ))
+          )}
         </div>
       </HomeLayout>
     </Fragment>

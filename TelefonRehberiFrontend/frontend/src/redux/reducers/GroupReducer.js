@@ -16,6 +16,9 @@ import {
   GET_GROUP_USERS_FAIL,
   GET_GROUP_USERS_REQUEST,
   GET_GROUP_USERS_SUCCESS,
+  GET_MY_GROUPS_FAIL,
+  GET_MY_GROUPS_REQUEST,
+  GET_MY_GROUPS_SUCCESS,
   UPDATE_GROUP_FAIL,
   UPDATE_GROUP_REQUEST,
   UPDATE_GROUP_RESET,
@@ -41,6 +44,27 @@ export const getAllGroupReducer = (state = { groups: [] }, action) => {
       return state;
   }
 };
+
+export const getMyGroupsReducer = (state = {  mygroups: [] }, action) => {
+  switch (action.type) {
+    case GET_MY_GROUPS_REQUEST:
+      return { ...state, loading: true };
+
+    case GET_MY_GROUPS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        mygroups: action.payload,
+      };
+
+    case GET_MY_GROUPS_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 
 export const addNewGroupReducer = (state = { group: {} }, action) => {
   switch (action.type) {

@@ -12,19 +12,22 @@ const EditUserModal = ({
   const dispatch = useDispatch();
   const { updateSuccess } = useSelector((state) => state.user);
   const { user , success } = useSelector((state) => state.getUserDetails);
+  const auth = useSelector((state) => state.auth);
   
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("string");
+  const [userId, setUserId] = useState(auth.user.id);
 
   useEffect(() => {
     setName(user.name)
     setSurname(user.surname)
     setPhoneNumber(user.phoneNumber)
     setDescription(user.description)
-  }, [user,success,setName,setSurname,setDescription,setPhoneNumber])
+    setUserId(auth.user.id)
+  }, [user,auth.user.id,success,setName,setSurname,setDescription,setPhoneNumber])
 
   const handleEditUserSubmit = () => {
     console.log("name : " + name);
@@ -34,7 +37,7 @@ const EditUserModal = ({
     console.log("name : " + user.id);
     //dispatch function
     dispatch(
-      UpdateUser(user.id, { name, surname, phoneNumber, image, description })
+      UpdateUser(user.id, { userId, name, surname, phoneNumber, image, description })
     );
     if (!updateSuccess) {
       setShowEditModal(false);

@@ -14,6 +14,9 @@ import {
   GET_GROUP_USERS_FAIL,
   GET_GROUP_USERS_REQUEST,
   GET_GROUP_USERS_SUCCESS,
+  GET_MY_GROUPS_FAIL,
+  GET_MY_GROUPS_REQUEST,
+  GET_MY_GROUPS_SUCCESS,
   UPDATE_GROUP_FAIL,
   UPDATE_GROUP_REQUEST,
   UPDATE_GROUP_SUCCESS,
@@ -146,6 +149,28 @@ export const UpdateGroup = (id,group) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_GROUP_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+
+
+export const GetMyGroups = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_MY_GROUPS_REQUEST,
+    });
+
+    const {data} = await axios.get(`https://localhost:7046/user/${id}/myGroups`)
+
+    dispatch({
+      type: GET_MY_GROUPS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_MY_GROUPS_FAIL,
       payload: error.message,
     });
   }

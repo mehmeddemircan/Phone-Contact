@@ -3,28 +3,54 @@ import ContinueWithButtons from '../button/ContinueWithButtons'
 import {Modal,Form,Button} from 'antd'
 import AuthModalForm from '../forms/AuthModalForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../redux/actions/AuthAction';
+import { login, register as _register } from '../../redux/actions/AuthAction';
+import { toast } from 'react-toastify';
 
 const AuthModal = ({showLoginModal,handleCloseLoginModal}) => {
 
-  const [form] = Form.useForm();
-    const [name, setName] = useState("");
+    const [form] = Form.useForm();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [register, setRegister] = useState(false);
-    const {user} = useSelector((state) => state.auth)
+
     const auth = useSelector((state) => state.auth)
     const dispatch = useDispatch()
 
-    const handleLoginUser = () => {
-      dispatch(login({email,password}))
+    const userSignup = () => {
+
+      const user = {firstName,lastName,email,password};
+      // if ( firstName === "" || email === "") {
+      //     toast.error("Name and email can not be empty")
+      // }
+      // if (password.length < 6) {
+      //   toast.error("Password Length must be at least 6 character ")
+      // }
+      dispatch(_register(user));
+    };
+
+    const handleUserAuth = (e) => {
+      e.preventDefault();
+      if (register) {
+        userSignup()
+      }else{
+        dispatch(login({email,password}))
+      }
+
+
+      console.log("first name " + firstName)
+      console.log("first name " + lastName)
+      console.log("first name " + email)
+      console.log("first name " + password)
     }
+
     useEffect(() => {
-      if (user && auth.authenticate == true ) {
+      if ( auth.authenticate == true ) {
         handleCloseLoginModal()
       }
-    }, [user,auth.authenticate])
+    }, [auth.authenticate])
 
   return (
   <Fragment>
@@ -63,15 +89,17 @@ const AuthModal = ({showLoginModal,handleCloseLoginModal}) => {
         </h5>
         <AuthModalForm 
           form={form}
-          name={name}
-          setName={setName}
+          firstName={firstName}
+          setFirstName={setFirstName}
+          lastName={lastName}
+          setLastName={setLastName}
           email ={email}
           setEmail={setEmail}
           register={register}
           password={password}
           setPassword={setPassword}
           setRegister={setRegister}
-          handleLoginUser ={handleLoginUser}
+          handleUserAuth ={handleUserAuth}
         />
       </Modal>
   </Fragment>

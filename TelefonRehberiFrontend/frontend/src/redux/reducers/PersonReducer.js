@@ -10,12 +10,18 @@ import {
   GET_ALL_USER_FAIL,
   GET_ALL_USER_REQUEST,
   GET_ALL_USER_SUCCESS,
+  GET_PEOPLE_ORDER_DESC_FAIL,
+  GET_PEOPLE_ORDER_DESC_REQUEST,
+  GET_PEOPLE_ORDER_DESC_SUCCESS,
   GET_USERS_BY_NAME_FAIL,
   GET_USERS_BY_NAME_REQUEST,
   GET_USERS_BY_NAME_SUCCESS,
   GET_USER_DETAILS_FAIL,
   GET_USER_DETAILS_REQUEST,
   GET_USER_DETAILS_SUCCESS,
+  GROUP_PEOPLE_BY_NAME_FAIL,
+  GROUP_PEOPLE_BY_NAME_REQUEST,
+  GROUP_PEOPLE_BY_NAME_SUCCESS,
   UPDATE_USER_FAIL,
   UPDATE_USER_REQUEST,
   UPDATE_USER_RESET,
@@ -143,6 +149,48 @@ export const getUsersByNameReducer = (state = { users: [] }, action) => {
     case GET_USERS_BY_NAME_FAIL:
       return { ...state, loading: false, error: action.payload };
 
+    default:
+      return state;
+  }
+};
+
+
+export const groupPeopleByLetterReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case GROUP_PEOPLE_BY_NAME_REQUEST:
+      return { ...state, loading: true };
+
+    case GROUP_PEOPLE_BY_NAME_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        users: action.payload,
+      };
+
+    case GROUP_PEOPLE_BY_NAME_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+
+export const getOrderByDescReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case GET_PEOPLE_ORDER_DESC_REQUEST:
+      return { ...state, loading: true };
+
+    case GET_PEOPLE_ORDER_DESC_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        users: action.payload,
+      };
+
+    case GET_PEOPLE_ORDER_DESC_FAIL:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

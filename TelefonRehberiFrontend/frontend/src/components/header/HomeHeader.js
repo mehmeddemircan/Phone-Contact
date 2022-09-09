@@ -60,19 +60,19 @@ const HomeHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link text-dark" to="/">
+              <Link class="nav-link text-dark" to="/users/all">
                Explore
               </Link>
             </li>
 
             <li class="nav-item">
-              <Link class="nav-link text-dark" to="/">
-                About
+              <Link class="nav-link text-dark" to="/my-contacts">
+                My Contacts
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link text-dark" to="/arac-kiralama">
-                Help
+              <Link class="nav-link text-dark" to="/my-comments">
+                My Comments
               </Link>
             </li>
           </ul>

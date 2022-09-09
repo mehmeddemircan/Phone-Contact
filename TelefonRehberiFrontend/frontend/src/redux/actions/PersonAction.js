@@ -16,16 +16,22 @@ import {
   GET_USER_DETAILS_FAIL,
   GET_USERS_BY_NAME_REQUEST,
   GET_USERS_BY_NAME_SUCCESS,
-  GET_USERS_BY_NAME_FAIL
+  GET_USERS_BY_NAME_FAIL,
+  GROUP_PEOPLE_BY_NAME_REQUEST,
+  GROUP_PEOPLE_BY_NAME_SUCCESS,
+  GROUP_PEOPLE_BY_NAME_FAIL,
+  GET_PEOPLE_ORDER_DESC_REQUEST,
+  GET_PEOPLE_ORDER_DESC_SUCCESS,
+  GET_PEOPLE_ORDER_DESC_FAIL
 } from "../constants/PersonConstant";
 import axios from "axios";
-export const AllUser = () => async (dispatch) => {
+export const AllUser = (id) => async (dispatch) => {
   try {
     dispatch({
       type: GET_ALL_USER_REQUEST,
     });
 
-    const { data } = await axios.get("https://localhost:7046/api/Persons");
+    const { data } = await axios.get(`https://localhost:7046/api/Persons/users/${id}/allPersons`);
 
     dispatch({
       type: GET_ALL_USER_SUCCESS,
@@ -147,5 +153,48 @@ export const GetUsersByName = (searchedName) => async (dispatch) => {
   }
 };
 
+export const GroupPeopleByLetter = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GROUP_PEOPLE_BY_NAME_REQUEST,
+    });
+
+    const { data } = await axios.get(
+      `https://localhost:7046/api/Persons/grouping-by-name`
+    );
+
+    dispatch({
+      type: GROUP_PEOPLE_BY_NAME_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GROUP_PEOPLE_BY_NAME_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const GetPeopleOrderByDesc = () => async (dispatch) => {
+  try {
+    dispatch({
+      type:  GET_PEOPLE_ORDER_DESC_REQUEST,
+    });
+
+    const { data } = await axios.get(
+      `https://localhost:7046/api/Persons/orderBy-desc`
+    );
+
+    dispatch({
+      type: GET_PEOPLE_ORDER_DESC_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PEOPLE_ORDER_DESC_FAIL,
+      payload: error.message,
+    });
+  }
+};
 
 

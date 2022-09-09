@@ -1,20 +1,21 @@
 import { Button } from "antd";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUsersInGroup } from "../../redux/actions/GroupAction";
+import { GetGroupDetails, GetUsersInGroup } from "../../redux/actions/GroupAction";
 import { AllUser, UpdateUser } from "../../redux/actions/PersonAction";
 import { UPDATE_USER_RESET } from "../../redux/constants/PersonConstant";
 
-const UserListGroupModal = ({ user, handleCloseGroupDetails }) => {
+const UserListGroupModal = ({ user }) => {
   //user update group logic
   const dispatch = useDispatch();
-
+  const auth = useSelector((state) => state.auth) 
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
   const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
   const [description, setDescription] = useState(user.description);
   const [image, setImage] = useState(user.image);
   const [groupId, setGroupId] = useState(user.groupId);
+  const [userId, setUserId] = useState(auth.user.id);
 
   const { group } = useSelector((state) => state.getGroupDetails);
   const { updateSuccess } = useSelector((state) => state.user);
@@ -28,6 +29,7 @@ const UserListGroupModal = ({ user, handleCloseGroupDetails }) => {
         description,
         image,
         groupId,
+        userId,
       })
     );
 
@@ -39,11 +41,12 @@ const UserListGroupModal = ({ user, handleCloseGroupDetails }) => {
 
   useEffect(() => {
     setGroupId(group[0].groupId);
+    setUserId(auth.user.id)
     if (updateSuccess) {
-      dispatch(GetUsersInGroup(groupId))
+      dispatch(GetGroupDetails(groupId))
       dispatch(AllUser())
   }
-  }, [dispatch,updateSuccess,group[0].groupId]);
+  }, [dispatch,auth.user.id,groupId,updateSuccess,group[0].groupId]);
 
   return (
     <Fragment>

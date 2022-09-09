@@ -8,38 +8,31 @@ const AddUserModal = ({ showUserModal, handleCloseUserModal }) => {
   const dispatch = useDispatch();
 
   const { success } = useSelector((state) => state.addNewUser);
-
+  const { user } = useSelector((state) => state.auth);
+  
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("string");
+  const [userId, setUserId] = useState(user.id)
   const handleAddSubmit = () => {
-    if (name.length < 2) {
-      // setErrors((prevArray) => [
-      //   ...prevArray,
-      //   `İsim en az 2 karakter olmalı`,
-      // ]);
-      errors.push("DSASADSAD")
+    if (name.length === 0) {
+    
+      errors.push("Name can not be empty")
     }
-    if (surname.length < 2) {
-      // setErrors((prevArray) => [
-      //   ...prevArray,
-      //   `Soyisim en az 2 karakter olmalı`,
-      // ]);
-      errors.push("DSASADSAD")
+    if (surname.length === 0) {
+     
+      errors.push("Surname can not be empty")
     }
     if (phoneNumber.length !== 10) {
-      // setErrors((prevArray) => [
-      //   ...prevArray,
-      //   `Telefon numarasi 10 karakter olmalı`,
-      // ]);
-      errors.push("DSASADSAD")
+ 
+      errors.push("phone number must be 10 length")
     }
     if (description.length === 0) {
-      // setErrors((prevArray) => [...prevArray, `Açıklama boş bırakılamaz`]);
-      errors.push("DSASADSAD")
+   
+      errors.push("Description can not be empty")
     }
     if (errors.length > 0) {
       errors.forEach((err) => {
@@ -48,7 +41,7 @@ const AddUserModal = ({ showUserModal, handleCloseUserModal }) => {
      
     }
     if (errors.length === 0) {
-      dispatch(AddUser({ name, surname, phoneNumber, image, description }));
+      dispatch(AddUser({ userId ,name, surname, phoneNumber, image, description }));
     }
     errors.length = 0 
     console.log("error length : " + errors.length);
@@ -56,10 +49,8 @@ const AddUserModal = ({ showUserModal, handleCloseUserModal }) => {
   };
 
   useEffect(() => {
-    if (success === false) {
-     
-    }
-  }, [success]);
+    setUserId(user.id)
+  }, [success,user.id]);
   return (
     <Fragment>
       <Modal
