@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TelefonRehberi.DataAccess\TelefonRehberi.DataAccess.csproj" />
-    <ProjectReference Include="..\TelefonRehberi.Entities\TelefonRehberi.Entities.csproj" />
+    <ProjectReference Include="..\TelefonRehberi.DataAccess\PhoneContact.DataAccess.csproj" />
+    <ProjectReference Include="..\TelefonRehberi.Entities\PhoneContact.Entities.csproj" />
   </ItemGroup>
 
 </Project>

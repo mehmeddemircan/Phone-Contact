@@ -5,7 +5,7 @@ import { GetGroupDetails, GetUsersInGroup } from "../../redux/actions/GroupActio
 import { AllUser, DeleteUser, UpdateUser } from "../../redux/actions/PersonAction";
 import { DELETE_USER_RESET } from "../../redux/constants/PersonConstant";
 
-const GroupMembers = ({ user }) => {
+const GroupMembers = ({ user ,groupDetails }) => {
   const { deleted, updated, updateSuccess } = useSelector(
     (state) => state.user
   );
@@ -29,7 +29,7 @@ const GroupMembers = ({ user }) => {
   useEffect(() => {
     setGroupId(null)
     setUserId(auth.user.id)
-    if (updateSuccess) {
+    if (  updateSuccess) {
         dispatch(GetGroupDetails(groupId))
         dispatch(AllUser(auth.user.id))
     }

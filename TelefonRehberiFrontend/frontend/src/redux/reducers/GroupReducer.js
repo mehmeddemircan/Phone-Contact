@@ -12,6 +12,7 @@ import {
   GET_ALL_GROUP_SUCCESS,
   GET_GROUP_DETAILS_FAIL,
   GET_GROUP_DETAILS_REQUEST,
+  GET_GROUP_DETAILS_RESET,
   GET_GROUP_DETAILS_SUCCESS,
   GET_GROUP_USERS_FAIL,
   GET_GROUP_USERS_REQUEST,
@@ -125,7 +126,8 @@ export const getGroupDetailsReducer = (state = { group: {} }, action) => {
 
     case GET_GROUP_DETAILS_FAIL:
       return { ...state, loading: false, error: action.payload };
-
+      
+    
     default:
       return state;
   }

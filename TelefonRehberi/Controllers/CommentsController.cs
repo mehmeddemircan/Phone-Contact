@@ -79,5 +79,13 @@ namespace TelefonRehberiApi.Controllers
         {
             await _commentService.TDelete(commentId);   
         }
+
+
+        [HttpGet("/{commentId}/comment-likes")]
+
+        public async Task<List<CommentLike>> GetCommentLikes (int commentId)
+        {
+            return await _commentService.GetCommentLikes(commentId); 
+        }
     }
 }

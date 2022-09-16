@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { authReducer } from "./reducers/AuthReducer";
-import { addNewCommentReducer, commentUpdateDeleteReducer, getGroupCommentsDescReducer, getGroupCommentsReducer, getMyCommentsReducer } from "./reducers/CommentReducer";
+import { addNewCommentReducer, commentUpdateDeleteReducer, getCommentLikesReducer, getGroupCommentsDescReducer, getGroupCommentsReducer, getMyCommentsReducer } from "./reducers/CommentReducer";
 import { addNewGroupReducer, getAllGroupReducer, getGroupDetailsReducer, getMyGroupsReducer, getUsersByGroupReducer, groupUpdateDeleteReducer } from "./reducers/GroupReducer";
 import {
   addNewUserReducer,
@@ -35,7 +35,8 @@ const rootReducer = combineReducers({
   getGroupCommentsDesc : getGroupCommentsDescReducer,
   getGroupComments : getGroupCommentsReducer,
   addNewComment : addNewCommentReducer,
-  commentUpdateDelete :commentUpdateDeleteReducer
+  commentUpdateDelete :commentUpdateDeleteReducer,
+  getCommentLikes : getCommentLikesReducer
 });
 
 const initialState = {};

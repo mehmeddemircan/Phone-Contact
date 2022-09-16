@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TelefonRehberi.DataAccess.Concrete.Contexts;
@@ -11,9 +12,10 @@ using TelefonRehberi.DataAccess.Concrete.Contexts;
 namespace TelefonRehberi.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220909102400_comment_Like_Dislike")]
+    partial class comment_Like_Dislike
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,30 +145,6 @@ namespace TelefonRehberi.DataAccess.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.CommentLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("Liked")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.ToTable("CommentLikes");
-                });
-
             modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Group", b =>
                 {
                     b.Property<int>("Id")
@@ -269,15 +247,6 @@ namespace TelefonRehberi.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.CommentLike", b =>
-                {
-                    b.HasOne("TelefonRehberi.Entities.Concrete.Comment", null)
-                        .WithMany("CommentLikes")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Person", b =>
                 {
                     b.HasOne("TelefonRehberi.Entities.Concrete.Group", null)
@@ -302,11 +271,6 @@ namespace TelefonRehberi.DataAccess.Migrations
                     b.Navigation("Group");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Comment", b =>
-                {
-                    b.Navigation("CommentLikes");
                 });
 
             modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Group", b =>

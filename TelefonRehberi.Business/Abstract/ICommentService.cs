@@ -18,5 +18,7 @@ namespace TelefonRehberi.Business.Abstract
         
          List<IGrouping<int, Comment>> GroupCommentsByGroupId(int userId);
 
+        Task<List<CommentLike>> GetCommentLikes(int commentId);
+
     }
 }

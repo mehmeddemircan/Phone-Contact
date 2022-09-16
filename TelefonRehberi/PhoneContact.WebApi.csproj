@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TelefonRehberi.Business\TelefonRehberi.Business.csproj" />
-    <ProjectReference Include="..\TelefonRehberi.Entities\TelefonRehberi.Entities.csproj" />
+    <ProjectReference Include="..\TelefonRehberi.Business\PhoneContact.Business.csproj" />
+    <ProjectReference Include="..\TelefonRehberi.Entities\PhoneContact.Entities.csproj" />
   </ItemGroup>
 
 </Project>

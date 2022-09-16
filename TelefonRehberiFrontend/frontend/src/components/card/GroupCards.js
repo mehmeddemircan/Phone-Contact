@@ -6,13 +6,14 @@ import {
   GetGroupDetails,
   GetUsersInGroup,
 } from "../../redux/actions/GroupAction";
+import { GET_GROUP_DETAILS_RESET } from "../../redux/constants/GroupConstants";
 import GroupDetailsModal from "../modal/GroupDetailsModal";
 import GroupDetailsPageHeader from "../pageheader/GroupDetailsPageHeader";
 
 const GroupCards = ({ groupItem }) => {
   const [showGroupDetailsModal, setShowGroupDetailsModal] = useState(false);
   const { group, loading, success } = useSelector((state) => state.getGroupDetails);
-
+  const dispatch = useDispatch()
    
   const handleShowGroupDetails = () => {
     setShowGroupDetailsModal(true);
@@ -20,8 +21,11 @@ const GroupCards = ({ groupItem }) => {
 
   const handleCloseGroupDetails = () => {
     setShowGroupDetailsModal(false);
+
+    dispatch({type : GET_GROUP_DETAILS_RESET})
+
   };
-  const dispatch = useDispatch();
+;
 
   const handleGetGroupDetails = (id) => {
     dispatch(GetGroupDetails(id));
@@ -57,7 +61,8 @@ const GroupCards = ({ groupItem }) => {
             class="btn btn-outline-primary"
             key={groupItem.id}
              onClick={() => {
-              //  handleGetUsers(group.id);
+            
+              
               handleGetGroupDetails(groupItem.id);
               handleShowGroupDetails();
              }}
@@ -68,11 +73,7 @@ const GroupCards = ({ groupItem }) => {
           
         </div>
       </div>
-      {/* {loading === true ? 
-        
-          <h2>waiting</h2>
-        
-       : (   */}
+ 
 
            <GroupDetailsModal
        
@@ -81,8 +82,7 @@ const GroupCards = ({ groupItem }) => {
        handleCloseGroupDetails={handleCloseGroupDetails}
       
      />
-       {/* )} */}
-
+ 
     
       
      

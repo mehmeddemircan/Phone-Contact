@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelefonRehberiApi", "TelefonRehberi\TelefonRehberiApi.csproj", "{1E39CAF8-18F1-48AA-AE87-DE4476D2DD63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneContact.WebApi", "TelefonRehberi\PhoneContact.WebApi.csproj", "{1E39CAF8-18F1-48AA-AE87-DE4476D2DD63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelefonRehberi.Entities", "TelefonRehberi.Entities\TelefonRehberi.Entities.csproj", "{DA0AD589-74B2-468D-B7EE-78B01C9884C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneContact.Entities", "TelefonRehberi.Entities\PhoneContact.Entities.csproj", "{DA0AD589-74B2-468D-B7EE-78B01C9884C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelefonRehberi.Business", "TelefonRehberi.Business\TelefonRehberi.Business.csproj", "{684E4682-B9D1-4BEC-90D2-C061BAFBB10B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneContact.Business", "TelefonRehberi.Business\PhoneContact.Business.csproj", "{684E4682-B9D1-4BEC-90D2-C061BAFBB10B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelefonRehberi.DataAccess", "TelefonRehberi.DataAccess\TelefonRehberi.DataAccess.csproj", "{D66855DE-CB89-4710-874A-EE945433DFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneContact.DataAccess", "TelefonRehberi.DataAccess\PhoneContact.DataAccess.csproj", "{D66855DE-CB89-4710-874A-EE945433DFA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelefonRehberi.Core", "TelefonRehberi.Core\TelefonRehberi.Core.csproj", "{600C417D-317B-4537-9C24-FC41C8DD937D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneContact.Core", "TelefonRehberi.Core\PhoneContact.Core.csproj", "{600C417D-317B-4537-9C24-FC41C8DD937D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

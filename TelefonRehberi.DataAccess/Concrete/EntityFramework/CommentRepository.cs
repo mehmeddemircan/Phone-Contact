@@ -31,6 +31,29 @@ namespace TelefonRehberi.DataAccess.Concrete.EntityFramework
             }
         }
 
+        public async Task<List<CommentLike>> GetCommentLikes(int commentId)
+        {
+            using (var context  = new ApplicationDbContext())
+            {
+                var result = from comment in context.CommentLikes
+
+                             where comment.CommentId == commentId
+                             select new CommentLike{
+
+                                 Id = comment.Id,
+                                 UserId = comment.UserId,  
+                                 CommentId = commentId,
+                                 Liked = true,
+                                 
+
+
+
+                             };
+
+                return await result.ToListAsync() ;
+            }
+        }
+
 
         // from the newest to the oldest ordering
         public async Task<List<Comment>> GetCommentsOrderByDesc(int groupId)

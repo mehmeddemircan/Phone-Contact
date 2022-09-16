@@ -39,6 +39,11 @@ namespace TelefonRehberi.Business.Concrete
             throw new NotImplementedException();
         }
 
+        public async Task<List<CommentLike>> GetCommentLikes(int commentId)
+        {
+            return await _commentRepository.GetCommentLikes(commentId);
+        }
+
         public async Task<List<Comment>> GetCommentsOrderByDesc(int groupId)
         {
             return await _commentRepository.GetCommentsOrderByDesc(groupId);

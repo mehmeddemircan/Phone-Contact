@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TelefonRehberi.DataAccess.Concrete.Contexts;
@@ -11,9 +12,10 @@ using TelefonRehberi.DataAccess.Concrete.Contexts;
 namespace TelefonRehberi.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220909141604_comment_Likes")]
+    partial class comment_Likes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,12 +110,6 @@ namespace TelefonRehberi.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommentDislike")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CommentLike")
-                        .HasColumnType("integer");
-
                     b.Property<string>("CommentText")
                         .IsRequired()
                         .HasColumnType("text");
@@ -151,7 +147,7 @@ namespace TelefonRehberi.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommentId")
+                    b.Property<int?>("CommentId")
                         .HasColumnType("integer");
 
                     b.Property<bool>("Liked")
@@ -273,9 +269,7 @@ namespace TelefonRehberi.DataAccess.Migrations
                 {
                     b.HasOne("TelefonRehberi.Entities.Concrete.Comment", null)
                         .WithMany("CommentLikes")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CommentId");
                 });
 
             modelBuilder.Entity("TelefonRehberi.Entities.Concrete.Person", b =>

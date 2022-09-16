@@ -12,6 +12,9 @@ import {
   GET_COMMENTS_IN_GROUP_DESC_FAIL,
   GET_COMMENTS_IN_GROUP_DESC_REQUEST,
   GET_COMMENTS_IN_GROUP_DESC_SUCCESS,
+  GET_COMMENT_LIKES_FAIL,
+  GET_COMMENT_LIKES_REQUEST,
+  GET_COMMENT_LIKES_SUCCESS,
   POST_COMMENT_FAIL,
   POST_COMMENT_REQUEST,
   POST_COMMENT_SUCCESS,
@@ -156,3 +159,27 @@ export const UpdateComment = (id,comment) => async (dispatch) => {
     });
   }
 };
+
+export const GetCommentLikes = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_COMMENT_LIKES_REQUEST,
+    });
+
+    const { data } = await axios.get(
+      `https://localhost:7046/${id}/comment-likes`
+     
+    );
+
+    dispatch({
+      type: GET_COMMENT_LIKES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_COMMENT_LIKES_FAIL,
+      error: error.response,
+    });
+  }
+};
+

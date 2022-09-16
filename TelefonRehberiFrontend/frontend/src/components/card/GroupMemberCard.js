@@ -25,7 +25,7 @@ const GroupMemberCard = ({groupDetails,loading}) => {
                         <h2>loading</h2>
                       ) : (
                         groupDetails.users.map((user) => (
-                          <GroupMembers key={user.id} user={user} />
+                          <GroupMembers key={user.id} user={user}  groupDetails={groupDetails}/>
                         ))
                       )}
                     </ol>

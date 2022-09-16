@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TelefonRehberi.Core\TelefonRehberi.Core.csproj" />
+    <ProjectReference Include="..\TelefonRehberi.Core\PhoneContact.Core.csproj" />
   </ItemGroup>
 
 </Project>

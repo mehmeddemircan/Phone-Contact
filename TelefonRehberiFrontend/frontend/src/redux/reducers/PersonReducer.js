@@ -1,3 +1,4 @@
+import { GET_GROUP_DETAILS_RESET } from "../constants/GroupConstants";
 import {
   ADD_USER_FAIL,
   ADD_USER_REQUEST,
@@ -113,6 +114,13 @@ export const userReducer = (state = { updated: {}, deleted : false }, action) =>
         updated: action.payload,
         updateSuccess: true,
       };
+
+      case GET_GROUP_DETAILS_RESET:
+        return {
+          ...state,
+          updateSuccess: false,
+        };
+  
 
     case DELETE_USER_FAIL:
     case UPDATE_USER_FAIL:

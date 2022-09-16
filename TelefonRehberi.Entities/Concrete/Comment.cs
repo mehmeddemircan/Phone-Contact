@@ -23,6 +23,10 @@ namespace TelefonRehberi.Entities.Concrete
 
         public DateTime CreatedTime { get; set; } = DateTime.Now;
 
+        public int CommentLike { get; set; } = 0;
+
+        public int CommentDislike { get; set; } = 0;
+        public ICollection<CommentLike>?  CommentLikes { get; set; }
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedTime { get; set; }
 
